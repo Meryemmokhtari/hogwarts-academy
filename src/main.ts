@@ -199,3 +199,30 @@ console.log("Gryffindor:", wizards.findByHouse("Gryffindor"));
 console.log("Slytherin:", wizards.findByHouse("Slytherin"));
 
 
+
+// Exercise 4: Validate spell power using a decorator.
+console.log("\n--- Exercise 4: Validate spell power ---");
+
+try {
+  spells.add({
+    id: 103,
+    name: "Lumos",
+    category: "healing",
+    power: 30
+  });
+
+  console.log("Valid spell added successfully.");
+
+  spells.add({
+    id: 104,
+    name: "Dark Spell",
+    category: "attack",
+    power: -10
+  });
+} catch (error: unknown) {
+  if (error instanceof Error) {
+    console.error("Spell rejected:", error.message);
+  }
+}
+
+console.log("All spells:", spells.getAll());

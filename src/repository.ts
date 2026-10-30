@@ -1,5 +1,5 @@
 ﻿import type { Wizard, Spell, NewWizard, House, WizardSummary } from "./types";
-import { Log, MeasureTime } from "./decorators";
+import { Log, MeasureTime, ValidateSpellPower } from "./decorators";
 
 export class Repository<T extends { id: number }> {
   private items: T[] = [];
@@ -31,7 +31,6 @@ export class Repository<T extends { id: number }> {
 export class WizardRepository extends Repository<Wizard> {
   addWizard(wizard: NewWizard): Wizard {
     const id = Math.max(0, ...this.getAll().map(w => w.id)) + 1;
-
     const newWizard: Wizard = { ...wizard, id };
 
     super.add(newWizard);
@@ -46,4 +45,9 @@ export class WizardRepository extends Repository<Wizard> {
   }
 }
 
-export class SpellRepository extends Repository<Spell> {}
+export class SpellRepository extends Repository<Spell> {
+  @ValidateSpellPower
+  add(spell: Spell): void {
+    super.add(spell);
+  }
+}
