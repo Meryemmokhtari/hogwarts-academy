@@ -252,3 +252,31 @@ console.log(academy.getSpellEvents(cacheTestEvents));
 
 console.log("Second call:");
 console.log(academy.getSpellEvents(cacheTestEvents));
+
+// Exercise 6: Test stricter type guards
+console.log("\n--- Exercise 6: Type Guards ---");
+
+const validHouse: unknown = "Gryffindor";
+const invalidHouse: unknown = "Beauxbatons";
+
+console.log("Valid house:", isHouse(validHouse));     // true
+console.log("Invalid house:", isHouse(invalidHouse)); // false
+
+const validWizard: unknown = {
+  id: 5,
+  name: "Neville Longbottom",
+  house: "Gryffindor",
+  level: 3,
+  active: true
+};
+
+const invalidWizard: unknown = {
+  id: 6,
+  name: "Pansy Parkinson",
+  house: "Beauxbatons",
+  level: 3,
+  active: true
+};
+
+console.log("Valid wizard:", isWizard(validWizard));     // true
+console.log("Invalid wizard:", isWizard(invalidWizard)); // false
