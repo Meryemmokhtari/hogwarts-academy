@@ -1,7 +1,8 @@
-import {
+﻿import {
   type Wizard,
   type Spell,
   type AcademyEvent,
+  type SpellCastEvent,
   type House,
   type HousePoints,
   type SpellCategory,
@@ -71,9 +72,9 @@ class AcademyService {
     return this.wizards.update(id, changes);
   }
 
-  getSpellEvents(events: AcademyEvent[]): Extract<AcademyEvent, { type: "spell-cast" }>[] {
+  getSpellEvents(events: AcademyEvent[]): SpellCastEvent[] {
     return events.filter(
-      (event): event is Extract<AcademyEvent, { type: "spell-cast" }> =>
+      (event): event is SpellCastEvent =>
         event.type === "spell-cast"
     );
   }
@@ -196,3 +197,5 @@ console.log("All wizards:", wizards.getAll());
 console.log("\n--- Exercise 2: Find wizards by house ---");
 console.log("Gryffindor:", wizards.findByHouse("Gryffindor"));
 console.log("Slytherin:", wizards.findByHouse("Slytherin"));
+
+

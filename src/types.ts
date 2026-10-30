@@ -55,3 +55,5 @@ export type AttackSpell = Extract<Spell, { category: "attack" }>;
 export type NonHealingCategory = Exclude<SpellCategory, "healing">;
 export type HousePoints = Record<House, number>;
 
+
+export type SpellCastEvent = Extract<AcademyEvent, { type: "spell-cast" }>;
