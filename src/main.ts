@@ -191,3 +191,8 @@ const newWizard = wizards.addWizard({
 
 console.log("New wizard:", newWizard);
 console.log("All wizards:", wizards.getAll());
+
+// Exercise 2: Find wizards by house.
+console.log("\n--- Exercise 2: Find wizards by house ---");
+console.log("Gryffindor:", wizards.findByHouse("Gryffindor"));
+console.log("Slytherin:", wizards.findByHouse("Slytherin"));

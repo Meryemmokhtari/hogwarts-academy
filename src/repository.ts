@@ -1,4 +1,4 @@
-﻿import type { Wizard, Spell, NewWizard } from "./types";
+﻿import type { Wizard, Spell, NewWizard, House, WizardSummary } from "./types";
 import { Log, MeasureTime } from "./decorators";
 
 export class Repository<T extends { id: number }> {
@@ -32,14 +32,17 @@ export class WizardRepository extends Repository<Wizard> {
   addWizard(wizard: NewWizard): Wizard {
     const id = Math.max(0, ...this.getAll().map(w => w.id)) + 1;
 
-    const newWizard: Wizard = {
-      ...wizard,
-      id
-    };
+    const newWizard: Wizard = { ...wizard, id };
 
     super.add(newWizard);
 
     return newWizard;
+  }
+
+  findByHouse(house: House): WizardSummary[] {
+    return this.getAll()
+      .filter(wizard => wizard.house === house)
+      .map(({ id, name, house }) => ({ id, name, house }));
   }
 }
 
