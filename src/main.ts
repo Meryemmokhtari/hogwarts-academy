@@ -178,3 +178,16 @@ const typeExamples: [
 ] | null = null;
 
 void typeExamples;
+
+// Exercise 1: Add a wizard without providing an ID.
+console.log("\n--- Exercise 1: Add wizard without ID ---");
+
+const newWizard = wizards.addWizard({
+  name: "Ron Weasley",
+  house: "Gryffindor",
+  level: 4,
+  active: true
+});
+
+console.log("New wizard:", newWizard);
+console.log("All wizards:", wizards.getAll());

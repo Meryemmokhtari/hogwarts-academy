@@ -1,4 +1,4 @@
-export type House =
+﻿export type House =
   | "Gryffindor"
   | "Slytherin"
   | "Ravenclaw"
@@ -41,10 +41,17 @@ export type ArrayElement<T> =
   T extends (infer Item)[] ? Item : never;
 
 // Utility type examples.
-export type NewWizard = Omit<Wizard, "id">;
+export type NewWizard = {
+  name: string;
+  house: House;
+  level: number;
+  active: boolean;
+  [key: string]: string | number | boolean;
+};
 export type WizardSummary = Pick<Wizard, "id" | "name" | "house">;
 export type WizardUpdate = Partial<Wizard>;
 
 export type AttackSpell = Extract<Spell, { category: "attack" }>;
 export type NonHealingCategory = Exclude<SpellCategory, "healing">;
 export type HousePoints = Record<House, number>;
+
