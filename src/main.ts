@@ -1,5 +1,4 @@
-﻿import {
-  type Wizard,
+import {
   type Spell,
   type AcademyEvent,
   type SpellCastEvent,
@@ -16,32 +15,9 @@
 
 import { WizardRepository, SpellRepository } from "./repository";
 import { Log, Cache } from "./decorators";
+import { isHouse, isWizard } from "./guards";
 
-function isHouse(value: unknown): value is House {
-  return (
-    value === "Gryffindor" ||
-    value === "Slytherin" ||
-    value === "Ravenclaw" ||
-    value === "Hufflepuff"
-  );
-}
 
-// Type guard: safely narrow unknown data to a Wizard.
-function isWizard(value: unknown): value is Wizard {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-
-  const candidate = value as Record<string, unknown>;
-
-  return (
-    typeof candidate.id === "number" &&
-    typeof candidate.name === "string" &&
-    isHouse(candidate.house) &&
-    typeof candidate.level === "number" &&
-    typeof candidate.active === "boolean"
-  );
-}
 
 class AcademyService {
   constructor(
@@ -280,3 +256,4 @@ const invalidWizard: unknown = {
 
 console.log("Valid wizard:", isWizard(validWizard));     // true
 console.log("Invalid wizard:", isWizard(invalidWizard)); // false
+
