@@ -79,3 +79,50 @@ export function ValidateSpellPower(
     return originalMethod.apply(this, args);
   };
 }
+
+/**
+ * Cache decorator: stores method results separately for each instance.
+ */
+export function Cache(
+  target: object,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor
+): void {
+  const originalMethod = descriptor.value as (
+    ...args: unknown[]
+  ) => unknown;
+
+  const instanceCaches = new WeakMap<object, Map<string, unknown>>();
+
+  descriptor.value = function (
+    this: object,
+    ...args: unknown[]
+  ): unknown {
+    let cacheKey: string;
+
+    try {
+      cacheKey = JSON.stringify(args) ?? String(args);
+    } catch {
+      return originalMethod.apply(this, args);
+    }
+
+    let instanceCache = instanceCaches.get(this);
+
+    if (!instanceCache) {
+      instanceCache = new Map<string, unknown>();
+      instanceCaches.set(this, instanceCache);
+    }
+
+    if (instanceCache.has(cacheKey)) {
+      console.log(`[CACHE HIT] ${String(propertyKey)}`);
+      return instanceCache.get(cacheKey);
+    }
+
+    console.log(`[CACHE MISS] ${String(propertyKey)}`);
+
+    const result = originalMethod.apply(this, args);
+    instanceCache.set(cacheKey, result);
+
+    return result;
+  };
+}

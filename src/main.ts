@@ -15,7 +15,7 @@
 } from "./types";
 
 import { WizardRepository, SpellRepository } from "./repository";
-import { Log } from "./decorators";
+import { Log, Cache } from "./decorators";
 
 function isHouse(value: unknown): value is House {
   return (
@@ -72,6 +72,7 @@ class AcademyService {
     return this.wizards.update(id, changes);
   }
 
+  @Cache
   getSpellEvents(events: AcademyEvent[]): SpellCastEvent[] {
     return events.filter(
       (event): event is SpellCastEvent =>
@@ -226,3 +227,28 @@ try {
 }
 
 console.log("All spells:", spells.getAll());
+
+
+
+// Exercise 5: Test Cache decorator.
+console.log("\n--- Exercise 5: Cache decorator ---");
+
+console.log("First call:");
+console.log(academy.getSpellEvents(events));
+
+console.log("Second call (same arguments):");
+console.log(academy.getSpellEvents(events));
+
+
+// Additional cache test with new arguments.
+console.log("\n--- Cache test with new events ---");
+
+const cacheTestEvents: AcademyEvent[] = [
+  { type: "spell-cast", wizardId: 2, spellName: "Accio" }
+];
+
+console.log("First call:");
+console.log(academy.getSpellEvents(cacheTestEvents));
+
+console.log("Second call:");
+console.log(academy.getSpellEvents(cacheTestEvents));
