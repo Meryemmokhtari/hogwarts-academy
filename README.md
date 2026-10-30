@@ -1,6 +1,20 @@
 # Hogwarts Academy — TypeScript Mini Project
 
-A small terminal project to practice:
+A terminal-based TypeScript project inspired by Hogwarts Academy, designed to practice and demonstrate advanced TypeScript concepts.
+
+## Features
+
+- Generic repositories with constraints.
+- Create wizards with automatically generated IDs.
+- Find and filter wizards by house.
+- Update wizard information.
+- Manage spells with spell-power validation.
+- Type guards to validate houses and wizard objects.
+- Discriminated unions for academy events.
+- Instance-based method caching.
+- Method decorators for logging, execution-time measurement, validation, and caching.
+
+## TypeScript Concepts
 
 - Generics and generic constraints
 - Utility types: `Pick`, `Omit`, `Partial`, `Record`, `Parameters`, `ReturnType`, `Extract`, `Exclude`
@@ -32,7 +46,8 @@ npm start
 npm run typecheck
 ```
 
-## Note about decorators
+## Note about Decorators
 
-This project intentionally uses the legacy TypeScript decorator API so you can learn the three method-decorator arguments:
-`target`, `propertyKey`, and `descriptor`. The project enables `experimentalDecorators` in `tsconfig.json`.
+This project intentionally uses the legacy TypeScript decorator API to demonstrate the three method-decorator arguments: `target`, `propertyKey`, and `descriptor`.
+
+The project enables `experimentalDecorators` in `tsconfig.json`.
