@@ -1,4 +1,4 @@
-import {
+﻿import {
   type Spell,
   type AcademyEvent,
   type SpellCastEvent,
@@ -16,6 +16,7 @@ import {
 import { WizardRepository, SpellRepository } from "./repository";
 import { Log, Cache } from "./decorators";
 import { isHouse, isWizard } from "./guards";
+import { HousePointsService } from "./house-points.service";
 
 
 
@@ -257,3 +258,23 @@ const invalidWizard: unknown = {
 console.log("Valid wizard:", isWizard(validWizard));     // true
 console.log("Invalid wizard:", isWizard(invalidWizard)); // false
 
+
+
+
+// Exercise 7: House Points Management
+console.log("\n--- Exercise 7: House Points Management ---");
+
+const housePoints = new HousePointsService();
+
+housePoints.addPoints("Gryffindor", 50);
+housePoints.addPoints("Slytherin", 30);
+housePoints.addPoints("Ravenclaw", 40);
+housePoints.addPoints("Hufflepuff", 20);
+
+console.log("\nHouse points:");
+console.table(housePoints.getRanking());
+
+housePoints.removePoints("Slytherin", 10);
+
+console.log("\nUpdated house ranking:");
+console.table(housePoints.getRanking());
